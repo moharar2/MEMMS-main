@@ -1460,8 +1460,8 @@ h2.section {{ direction: rtl; text-align: right; background: #E8F4F2; color: #11
 
         content += '<h2 class="section">ثانيًا: بيانات الجهاز الطبي</h2>'
         content += self._html_info_table([
-            ("رقم الأصل", eq.get("asset_number")), ("اسم الجهاز", eq.get("name_ar")),
-            ("الرقم التسلسلي", eq.get("serial_number")), ("الموديل", eq.get("model")),
+            ("رقم الأصل (Asset Tag)", eq.get("asset_number")), ("اسم الجهاز", eq.get("name_ar")),
+            ("الرقم التسلسلي (S/N)", eq.get("serial_number")), ("الموديل", eq.get("model")),
             ("الأهمية", eq.get("criticality")), ("درجة الخطورة", eq.get("risk_level"))
         ])
 
@@ -1484,15 +1484,14 @@ h2.section {{ direction: rtl; text-align: right; background: #E8F4F2; color: #11
             ("تكلفة العمالة (ر.س)", wo.get("labor_cost", 0)),
             ("إجمالي التكلفة (ر.س)", wo.get("total_cost", 0))
         ])
-        content += """<table class="signatures" dir="rtl"><tbody><tr>
-<td><strong>الفني / المهندس المنفذ</strong><br><br>الاسم والتوقيع: ........................</td>
-<td><strong>رئيس قسم الهندسة الطبية</strong><br><br>الاسم والتوقيع: ........................</td>
-<td><strong>الاعتماد الإداري</strong><br><br>التوقيع والختم: ........................</td>
+        content += """<table dir="rtl" class="signatures" width="100%" border="0" cellpadding="4" cellspacing="0" style="margin-top: 22pt; border-collapse: collapse;"><tbody><tr>
+<td width="33.3%" align="center" style="vertical-align: top; padding: 12pt 8pt 4pt; border: none; border-top: 1pt solid #94A3B8;"><strong>الاعتماد الإداري</strong><br><br>التوقيع والختم: ........................</td>
+<td width="33.3%" align="center" style="vertical-align: top; padding: 12pt 8pt 4pt; border: none; border-top: 1pt solid #94A3B8;"><strong>رئيس قسم الهندسة الطبية</strong><br><br>الاسم والتوقيع: ........................</td>
+<td width="33.3%" align="center" style="vertical-align: top; padding: 12pt 8pt 4pt; border: none; border-top: 1pt solid #94A3B8;"><strong>الفني / المهندس المنفذ</strong><br><br>الاسم والتوقيع: ........................</td>
 </tr></tbody></table>"""
-        return self._html_document(
-            wo.get("number") and f"إشعار وتذكرة أمر صيانة طبية — رقم {wo.get('number')}" or "إشعار وتذكرة أمر صيانة طبية",
-            content, report_data
-        )
+        wo_num = wo.get("number")
+        title = f"إشعار وتذكرة أمر صيانة طبية — رقم {wo_num}" if wo_num else "إشعار وتذكرة أمر صيانة طبية"
+        return self._html_document(title, content, report_data)
 
 
 
