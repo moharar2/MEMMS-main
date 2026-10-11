@@ -1,0 +1,173 @@
+
+--- CRASH REPORT ---
+Traceback (most recent call last):
+  File "C:\Users\Mohammed\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1969, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Mohammed\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: no such column: technicians.nationality
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "E:\cmms\MEMMS\src\ui\main_window.py", line 167, in _on_nav_changed
+    self.navigate_to(key)
+    ~~~~~~~~~~~~~~~~^^^^^
+  File "E:\cmms\MEMMS\src\ui\main_window.py", line 154, in navigate_to
+    widget.load_data()
+    ~~~~~~~~~~~~~~~~^^
+  File "E:\cmms\MEMMS\src\ui\views\technicians_view.py", line 33, in load_data
+    self.refresh_data()
+    ~~~~~~~~~~~~~~~~~^^
+  File "E:\cmms\MEMMS\src\ui\views\technicians_view.py", line 115, in refresh_data
+    self._load_technicians()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "E:\cmms\MEMMS\src\ui\views\technicians_view.py", line 127, in _load_technicians
+    techs = technician_service.list_technicians(db, status=status)
+  File "E:\cmms\MEMMS\src\services\technician_service.py", line 168, in list_technicians
+    return query.order_by(Technician.full_name.asc()).all()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Mohammed\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\orm\query.py", line 2711, in all
+    return self._iter().all()  # type: ignore
+           ~~~~~~~~~~^^
+  File "C:\Users\Mohammed\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\orm\query.py", line 2864, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+                                                  ~~~~~~~~~~~~~~~~~~~~^
+        statement,
+        ^^^^^^^^^^
+        params,
+        ^^^^^^^
+        execution_options={"_sa_orm_load_options": self.load_options},
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Mohammed\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\orm\session.py", line 2373, in execute
+    return self._execute_internal(
+           ~~~~~~~~~~~~~~~~~~~~~~^
+        statement,
+        ^^^^^^^^^^
+    ...<4 lines>...
+        _add_event=_add_event,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Mohammed\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\orm\session.py", line 2271, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self,
+        ^^^^^
+    ...<4 lines>...
+        conn,
+        ^^^^^
+    )
+    ^
+  File "C:\Users\Mohammed\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\orm\context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+        statement, params or {}, execution_options=execution_options
+    )
+  File "C:\Users\Mohammed\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1421, in execute
+    return meth(
+        self,
+        distilled_parameters,
+        execution_options or NO_OPTIONS,
+    )
+  File "C:\Users\Mohammed\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\sql\elements.py", line 526, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self, distilled_params, execution_options
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Mohammed\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1643, in _execute_clauseelement
+    ret = self._execute_context(
+        dialect,
+    ...<8 lines>...
+        cache_hit=cache_hit,
+    )
+  File "C:\Users\Mohammed\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1848, in _execute_context
+    return self._exec_single_context(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        dialect, context, statement, parameters
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Mohammed\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1988, in _exec_single_context
+    self._handle_dbapi_exception(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        e, str_statement, effective_parameters, cursor, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Mohammed\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 2365, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\Mohammed\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\base.py", line 1969, in _exec_single_context
+    self.dialect.do_execute(
+    ~~~~~~~~~~~~~~~~~~~~~~~^
+        cursor, str_statement, effective_parameters, context
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Mohammed\AppData\Local\Python\pythoncore-3.14-64\Lib\site-packages\sqlalchemy\engine\default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: technicians.nationality
+[SQL: SELECT technicians.user_id AS technicians_user_id, technicians.employee_id AS technicians_employee_id, technicians.full_name AS technicians_full_name, technicians.specialization AS technicians_specialization, technicians.phone AS technicians_phone, technicians.email AS technicians_email, technicians.qualification AS technicians_qualification, technicians.status AS technicians_status, technicians.nationality AS technicians_nationality, technicians.id_document_type AS technicians_id_document_type, technicians.id_number AS technicians_id_number, technicians.job_title AS technicians_job_title, technicians.department_id AS technicians_department_id, technicians.work_entity AS technicians_work_entity, technicians.hire_date AS technicians_hire_date, technicians.id AS technicians_id, technicians.created_at AS technicians_created_at, technicians.updated_at AS technicians_updated_at 
+FROM technicians ORDER BY technicians.full_name ASC]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+
+--- CRASH REPORT ---
+Traceback (most recent call last):
+  File "E:\cmms\MEMMS\main.py", line 157, in <module>
+    main()
+    ~~~~^^
+  File "E:\cmms\MEMMS\main.py", line 125, in main
+    icon_path = Path(__file__).resolve().parent / "icon.ico"
+                ^^^^
+NameError: name 'Path' is not defined
+
+
+--- CRASH REPORT ---
+Traceback (most recent call last):
+  File "C:\Users\Mohammed\Desktop\MEMMS\src\ui\views\preventive_view.py", line 303, in <lambda>
+    callback=lambda _, pid=p.id: self._open_edit_plan_dialog(pid)
+                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\Mohammed\Desktop\MEMMS\src\ui\views\preventive_view.py", line 322, in _open_edit_plan_dialog
+    dlg = PMPlanDialog(plan_id=plan_id, parent=self)
+  File "C:\Users\Mohammed\Desktop\MEMMS\src\ui\views\pm_plan_dialog.py", line 152, in __init__
+    self._load_plan_data()
+    ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Mohammed\Desktop\MEMMS\src\ui\views\pm_plan_dialog.py", line 214, in _load_plan_data
+    self.checklist_list.addItem(item)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+TypeError: 'PySide6.QtWidgets.QListWidget.addItem' called with wrong argument types:
+  PySide6.QtWidgets.QListWidget.addItem(dict)
+Supported signatures:
+  PySide6.QtWidgets.QListWidget.addItem(item: PySide6.QtWidgets.QListWidgetItem, /)
+  PySide6.QtWidgets.QListWidget.addItem(label: str, /)
+
+
+--- CRASH REPORT ---
+Traceback (most recent call last):
+  File "C:\Users\Mohammed\Desktop\MEMMS\src\ui\views\preventive_view.py", line 303, in <lambda>
+    callback=lambda _, pid=p.id: self._open_edit_plan_dialog(pid)
+                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "C:\Users\Mohammed\Desktop\MEMMS\src\ui\views\preventive_view.py", line 322, in _open_edit_plan_dialog
+    dlg = PMPlanDialog(plan_id=plan_id, parent=self)
+  File "C:\Users\Mohammed\Desktop\MEMMS\src\ui\views\pm_plan_dialog.py", line 152, in __init__
+    self._load_plan_data()
+    ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Mohammed\Desktop\MEMMS\src\ui\views\pm_plan_dialog.py", line 214, in _load_plan_data
+    if isinstance(item, dict):
+TypeError: 'PySide6.QtWidgets.QListWidget.addItem' called with wrong argument types:
+  PySide6.QtWidgets.QListWidget.addItem(dict)
+Supported signatures:
+  PySide6.QtWidgets.QListWidget.addItem(item: PySide6.QtWidgets.QListWidgetItem, /)
+  PySide6.QtWidgets.QListWidget.addItem(label: str, /)
+
